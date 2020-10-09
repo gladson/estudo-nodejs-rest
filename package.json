@@ -1,0 +1,20 @@
+{
+  "name": "crudjs",
+  "version": "1.0.0",
+  "description": "Projeto crud NodeJs e MongoDB",
+  "keywords": ["aliens", "crud", "nodejs", "mongodb"],
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "gladsonbrito@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
