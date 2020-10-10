@@ -2,7 +2,12 @@
   "name": "crudjs",
   "version": "1.0.0",
   "description": "Projeto crud NodeJs e MongoDB",
-  "keywords": ["aliens", "crud", "nodejs", "mongodb"],
+  "keywords": [
+    "aliens",
+    "crud",
+    "nodejs",
+    "mongodb"
+  ],
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js"
@@ -11,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
+    "express-validator": "^6.6.1",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.8"
   },
