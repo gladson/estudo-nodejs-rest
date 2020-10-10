@@ -1,7 +1,9 @@
+require('dotenv').config()
+
 const express = require('express')
 const mongoose = require('mongoose')
 
-const url = 'mongodb+srv://gladson:12estoucontigo12@cluster0.ml8dj.mongodb.net/crudjs_db?retryWrites=true&w=majority'
+// const config = require('./config/settings')
 
 const app = express()
 
@@ -10,8 +12,10 @@ const app = express()
  * 
  */
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
 
-mongoose.connect(url, {
+// mongoose.connect(config.mongoURI, {
+mongoose.connect(process.env.MONGOURI, {
     useNewUrlParser:true,
     useUnifiedTopology: true
 })
@@ -22,11 +26,12 @@ con.on('open', () => {
     console.log('MongoDB conectado...')
 })
 
-const alienRouter = require('./routers/aliens')
+// ROUTE
+app.use('/aliens', require('./routers/aliens'))
 
-app.use('/aliens', alienRouter)
+// SERVER - PORT
+const port = process.env.PORT || 9000;
 
-app.listen(9000, () => {
-    console.log('Servidor rodando...')
-    console.log('http://localhost:9000')
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta::${port}`)
 })
