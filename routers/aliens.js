@@ -1,9 +1,10 @@
 const express = require('express')
 const { validationResult } = require('express-validator')
-const router = express.Router()
 
 const validate = require('../validators/validate')
 const Alien = require('../models/aliens')
+
+const router = express.Router()
 
 /**
  * Route => alien
@@ -11,8 +12,35 @@ const Alien = require('../models/aliens')
 
 router.get('/', async (req, res) => {
     try {
-        const aliens = await Alien.find()
-        res.json(aliens)
+        const pageSize = parseInt(req.query.pageSize) || 10
+        const pageNumber = parseInt(req.query.pageNumber) || 1
+        
+        const options = 
+        { 
+            limit: pageSize, 
+            page: pageNumber, 
+            sort: '-createdAt' 
+        }
+
+        for (const key of Object.keys(req.query)) {
+            if (key === "pageNumber" || key === "pageSize") {
+                delete req.query[key];
+            }
+        }
+        
+        const query = Object.keys(req.query).reduce((mappedQuery, key) => {
+            if (req.query[key]) {
+                mappedQuery[key] = typeof req.query[key] === "boolean" ? req.query[key] : new RegExp(req.query[key], 'i')
+            }
+            return mappedQuery
+        }, {})
+        
+        const aliens = await Alien.paginate(query, options)
+        res.status(200).json(aliens);
+        // Alien.paginate(query, options).then(function(aliens){
+        //     res.json(aliens)
+        // })
+        
     } catch (error) {
         res.send('Error: ' + error)
     }
