@@ -5,6 +5,12 @@ const url = 'mongodb+srv://gladson:12estoucontigo12@cluster0.ml8dj.mongodb.net/c
 
 const app = express()
 
+/**
+ * UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'name' of undefined
+ * 
+ */
+app.use(express.json())
+
 mongoose.connect(url, {
     useNewUrlParser:true,
     useUnifiedTopology: true
@@ -15,12 +21,6 @@ const con = mongoose.connection
 con.on('open', () => {
     console.log('MongoDB conectado...')
 })
-
-/**
- * UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'name' of undefined
- * 
- */
-app.use(express.json())
 
 const alienRouter = require('./routers/aliens')
 
