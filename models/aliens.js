@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 /**
  * Model => alienSchema
@@ -28,5 +28,7 @@ const alienSchema = new mongoose.Schema({
         default: false
     }
 }, { timestamps: true })
+
+alienSchema.plugin(mongoosePaginate)
 
 module.exports = mongoose.model('Alien', alienSchema)
