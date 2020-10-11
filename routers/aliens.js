@@ -42,16 +42,25 @@ router.get('/', async (req, res) => {
         // })
         
     } catch (error) {
-        res.send('Error: ' + error)
+        if (process.env.DEBUG === true) {
+            res.status(500).json('Error: ' + error)
+        } else {
+            res.status(500).json(
+                {
+                    success: false,
+                    message: 'Error: Desculpe ocorreu um problema'
+                }
+            )
+        }
     }
 })
 
-router.post('/', validate.validateAddAlien(), async(req, res) => {
+router.post('/', validate.validatePostAlien(), async(req, res) => {
     try {
         const errors = validationResult(req)
     
         if (!errors.isEmpty()) {
-            return res.status(422).send({
+            return res.status(422).json({
                 success: false,
                 message: errors
             })
@@ -66,36 +75,137 @@ router.post('/', validate.validateAddAlien(), async(req, res) => {
         const resultAlien = await alien.save()
         res.json(resultAlien)
     } catch (error) {
-        res.send('Error: ' + error)
+        if (process.env.DEBUG === true) {
+            res.status(500).json('Error: ' + error)
+        } else {
+            res.status(500).json(
+                {
+                    success: false,
+                    message: 'Error: Desculpe ocorreu um problema'
+                }
+            )
+        }
     }
 })
 
 router.get('/:id', async (req, res) => {
     try {
         const alien = await Alien.findById(req.params.id)
+        if (alien === null) {
+            return res.status(422).json({
+                success: false,
+                message: 'Error: Desculpe não conseguimos encontrar em nossa base dados'
+            })
+        }
         res.json(alien)
     } catch (error) {
-        res.send('Error: ' + error)
+        if (process.env.DEBUG === true) {
+            res.status(500).json('Error: ' + error)
+        } else {
+            res.status(500).json(
+                {
+                    success: false,
+                    message: 'Error: Desculpe ocorreu um problema'
+                }
+            )
+        }
     }
 })
 
-router.patch('/:id', validate.validateChangeAlien(), async (req, res) => {
+router.patch('/:id', validate.validatePatchAlien(), async (req, res) => {
     try {
         const errors = validationResult(req)
     
         if (!errors.isEmpty()) {
-            return res.status(422).send({
+            return res.status(422).json({
                 success: false,
                 message: errors
             })
         }
 
         const alien = await Alien.findById(req.params.id)
+        if (alien === null) {
+            return res.status(422).json({
+                success: false,
+                message: 'Error: Desculpe não conseguimos encontrar em nossa base dados'
+            })
+        }
         alien.sub = req.body.sub
         resultChangeAlien = await alien.save()
         res.json(resultChangeAlien)
     } catch (error) {
-        res.send('Error: ' + error)
+        if (process.env.DEBUG === true) {
+            res.status(500).json('Error: ' + error)
+        } else {
+            res.status(500).json(
+                {
+                    success: false,
+                    message: 'Error: Desculpe ocorreu um problema'
+                }
+            )
+        }
+    }
+})
+
+router.put('/:id', validate.validatePutAlien(), async (req, res) => {
+    try {
+        const errors = validationResult(req)
+    
+        if (!errors.isEmpty()) {
+            return res.status(422).json({
+                success: false,
+                message: errors
+            })
+        }
+
+        const alien = await Alien.findById(req.params.id)
+        if (alien === null) {
+            return res.status(422).json({
+                success: false,
+                message: 'Error: Desculpe não conseguimos encontrar em nossa base dados'
+            })
+        }
+        alien.set(req.body)
+        // alien.sub = req.body.sub
+        // alien.name = req.body.name
+        // alien.tech = req.body.tech
+        resultChangeAlien = await alien.save()
+        res.json(resultChangeAlien)
+    } catch (error) {
+        if (process.env.DEBUG === true) {
+            res.status(500).json('Error: ' + error)
+        } else {
+            res.status(500).json(
+                {
+                    success: false,
+                    message: 'Error: Desculpe ocorreu um problema'
+                }
+            )
+        }
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const alien = await Alien.findByIdAndRemove(req.params.id)
+        if (alien === null) {
+            return res.status(422).json({
+                success: false,
+                message: 'Error: Desculpe não conseguimos encontrar em nossa base dados'
+            })
+        }
+        res.json(alien)
+    } catch (error) {
+        if (process.env.DEBUG === true) {
+            res.status(500).json('Error: ' + error)
+        } else {
+            res.status(500).json(
+                {
+                    success: false,
+                    message: 'Error: Desculpe ocorreu um problema'
+                }
+            )
+        }
     }
 })
 
