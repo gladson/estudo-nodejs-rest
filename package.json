@@ -6,14 +6,30 @@
     "aliens",
     "crud",
     "nodejs",
-    "mongodb"
+    "express",
+    "mongodb",
+    "mongoose",
+    "mocha",
+    "chai",
+    "validate",
+    "paginate"
   ],
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "lint": "eslint --ext .js -f ./node_modules/eslint-formatter-friendly . --fix",
+    "test": "mocha --exit ./src/test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gladson/estudo-nodejs-rest.git"
   },
   "author": "gladsonbrito@gmail.com",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gladson/estudo-nodejs-rest/issues"
+  },
+  "homepage": "https://github.com/gladson/estudo-nodejs-rest#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -23,6 +39,28 @@
     "mongoose-paginate-v2": "^1.3.9"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-formatter-friendly": "^7.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "mocha": "^8.1.3",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
