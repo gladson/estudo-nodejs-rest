@@ -18,7 +18,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "lint": "eslint --ext .js -f ./node_modules/eslint-formatter-friendly . --fix",
-    "test": "mocha --exit ./src/test/**/*.js"
+    "test": "mocha --exit ./src/test/**/*test.js --require ./src/test/util/test_helper.js"
   },
   "repository": {
     "type": "git",
