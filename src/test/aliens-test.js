@@ -140,18 +140,41 @@ describe("Aliens", () => {
         });
     });
 
+    // /**
+    //  * TESTE => Atualizar campos
+    //  * Rota: /aliens/:id
+    //  */
+    // describe('PUT /aliens/:id', async () => {
+    //     it('PUT: Atualizar um ou mais campos do alien', (done) => {
+    //         const alienPatch = {
+    //             name: 'Gladson',
+    //             tech: 'Dart',
+    //             sub: false,
+    //         };
+    //         chai.request(`${process.env.HOST}:${process.env.PORT}`)
+    //             .put(`/aliens/${newAlien.id}`)
+    //             .send(alienPatch)
+    //             .end((error, res) => {
+    //                 /**
+    //                  * Salvando com sucesso, irá retornar status 200
+    //                  */
+    //                 res.should.have.status(200)
+    //                 res.should.be.json
+    //                 res.body.sub = false
+
+    //                 done()
+    //             })
+    //     })
+    // })
+
     /**
-     * TESTE => Deletar objeto do banco de dados
-     * Rota: /aliens/:id
+     *  TESTE => Deletar objeto do banco de dados
+     *  Rota: /aliens/:id
      */
     describe("DELETE /aliens/:id", async () => {
         it("DELETE: Deletar o alien do banco de dados", (done) => {
-            const alienPatch = {
-                sub: true,
-            };
             chai.request(`${process.env.HOST}:${process.env.PORT}`)
                 .delete(`/aliens/${newAlien.id}`)
-                .send(alienPatch)
                 .end((error, res) => {
                     /**
                      * Salvando com sucesso, irá retornar status 200
