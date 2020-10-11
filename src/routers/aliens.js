@@ -187,6 +187,29 @@ router.put("/:id", validate.validatePutAlien(), async (req, res) => {
     }
 });
 
+router.delete("/todos", async (req, res) => {
+    try {
+        const alien = await Alien.deleteMany({ name: "Gladson" });
+        if (alien === null) {
+            res.status(404).json({
+                success: false,
+                message:
+                    "Error: Desculpe não conseguimos encontrar em nossa base dados",
+            });
+        }
+        res.json(alien);
+    } catch (error) {
+        if (process.env.DEBUG === true) {
+            res.status(500).json(`Error: ${error}`);
+        } else {
+            res.status(500).json({
+                success: false,
+                message: "Error: Desculpe ocorreu um problema",
+            });
+        }
+    }
+});
+
 router.delete("/:id", async (req, res) => {
     try {
         const alien = await Alien.findByIdAndRemove(req.params.id);
