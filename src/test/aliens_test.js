@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const mongoose = require("mongoose");
 const chai = require("chai");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const chaiHttp = require("chai-http");
 
 chai.use(chaiHttp);
@@ -19,7 +19,7 @@ const Alien = require("../models/aliens");
  */
 describe("Aliens", () => {
     let alienID;
-    let newAlien = new Alien({
+    const newAlien = new Alien({
         name: "Gladson",
         tech: "NodeJS",
         sub: false,
