@@ -7,6 +7,20 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Mocha",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "runtimeExecutable": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": ["--exit"],
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "program": "${workspaceFolder}/src/test/**/*.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "NodeJS",
             "skipFiles": [
                 "<node_internals>/**"
