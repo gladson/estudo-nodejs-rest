@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 // mongoose.connect(config.mongoURI, {
 mongoose.connect(process.env.MONGOURI, {
     useNewUrlParser:true,
+    useFindAndModify: false,
     useUnifiedTopology: true
 })
 
