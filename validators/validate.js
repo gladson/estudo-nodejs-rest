@@ -1,21 +1,30 @@
 const { check } = require('express-validator')
 
-const validateAddAlien = () => {
+const validatePostAlien = () => {
     return [
         check('name').notEmpty().withMessage('Name not empty').isString().withMessage(' must be String'),
         check('tech').notEmpty().withMessage('Tech not empty').isString().withMessage(' must be String')
     ]
 }
 
-const validateChangeAlien = () => {
+const validatePutAlien = () => {
+    return [
+        check('sub').isBoolean().withMessage('Sub not boolean'),
+        check('name').notEmpty().withMessage('Name not empty').isString().withMessage(' must be String'),
+        check('tech').notEmpty().withMessage('Tech not empty').isString().withMessage(' must be String')
+    ]
+}
+
+const validatePatchAlien = () => {
     return [
         check('sub').isBoolean().withMessage('Sub not boolean')
     ]
 }
 
 const validator = {
-    validateAddAlien : validateAddAlien,
-    validateChangeAlien: validateChangeAlien
+    validatePostAlien : validatePostAlien,
+    validatePutAlien: validatePutAlien,
+    validatePatchAlien: validatePatchAlien
 }
 
 module.exports = validator
