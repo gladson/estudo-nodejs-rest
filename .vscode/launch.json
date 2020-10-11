@@ -12,11 +12,11 @@
                 "<node_internals>/**"
             ],
             "runtimeExecutable": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-            "args": ["--exit"],
+            "args": ["--exit", "--require", "${workspaceFolder}/src/test/util/test_helper.js"],
             "restart": true,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "program": "${workspaceFolder}/src/test/**/*.js"
+            "program": "${workspaceFolder}/src/test/**/*test.js"
         },
         {
             "type": "node",
